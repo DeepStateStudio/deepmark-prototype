@@ -2,40 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>DeepMark • Deep State Studio • v0.2 • Sydney Solar Campaign</title>
+  <title>DeepMark • Deep State Studio • v0.3 • Smart Inference UI</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-zinc-950 text-white">
   <div class="flex h-screen">
-    <div class="w-64 bg-zinc-900 p-4">
+    <!-- Sidebar -->
+    <div class="w-72 bg-zinc-900 p-4 border-r">
       <h1 class="text-xl font-bold text-cyan-400">🌊 Deep State Studio • DeepMark</h1>
-      <nav class="mt-6 space-y-3 text-sm">
-        <div class="bg-zinc-700 px-4 py-2 rounded-xl">🏠 Dashboard</div>
-        <div>📋 Templates • Solar • SaaS • Real Estate</div>
-        <div>✨ New Campaign</div>
-      </nav>
-      <button onclick="alert('Logo + colours uploaded ✓ Tone: Professional & trustworthy')" class="mt-8 w-full bg-emerald-600 py-2 rounded-xl">📤 Brand Kit Uploaded</button>
-    </div>
-    
-    <div class="flex-1 p-6">
-      <input class="w-full bg-zinc-800 p-4 rounded-2xl" value="30s realistic video + 5 social images for Sydney solar panel installation service, professional actors, blue sky, trust vibe" />
-      
-      <button onclick="alert('Generating with Kling + Veo models... 4 assets ready!')" class="mt-4 w-full bg-gradient-to-r from-cyan-400 to-violet-500 text-black font-bold py-5 text-xl rounded-2xl">
-        🚀 GENERATE FULL CORPORATE PACK (10 assets)
-      </button>
-
-      <div class="grid grid-cols-3 gap-3 mt-8">
-        <div class="bg-zinc-800 p-3 rounded-xl">📹 30s Promo Video • Ready</div>
-        <div class="bg-zinc-800 p-3 rounded-xl">📸 5 LinkedIn Images</div>
-        <div class="bg-zinc-800 p-3 rounded-xl">📧 Email + Instagram Pack</div>
+      <select onchange="autoInfer()" class="w-full mt-4 bg-zinc-800 p-3 rounded-xl">
+        <option selected>Industry: Solar / Energy (Sydney)</option>
+        <option>Real Estate • SaaS • Fitness • Finance</option>
+      </select>
+      <div class="mt-4 bg-zinc-800 p-3 rounded-xl text-xs">
+        🤖 Agent inferred: <span class="text-emerald-400">30s video • Professional actors • Brand colors locked • Photorealistic • LinkedIn + Instagram ready • CTA added</span>
+        <button onclick="alert('Parameters applied ✓')" class="mt-2 w-full bg-emerald-500 text-black py-1 rounded">Accept Inference</button>
       </div>
-      <button onclick="alert('All assets exported + scheduled to LinkedIn! 🎉')" class="mt-4 w-full bg-white text-zinc-950 py-3 font-bold">📥 EXPORT ALL + SCHEDULE POSTS</button>
+      <button onclick="generateWithInference()" class="mt-6 w-full bg-gradient-to-r from-cyan-400 to-violet-500 text-black font-bold py-4 rounded-2xl">🚀 INFER + GENERATE FULL PACK</button>
     </div>
-    
-    <div class="w-80 bg-zinc-900 p-4">
-      <h3>🤖 Forge Agent • Optimising...</h3>
-      <button class="mt-2 w-full bg-white text-black py-3">Use Sydney solar style + brand lock</button>
+
+    <!-- Main -->
+    <div class="flex-1 p-6">
+      <input id="mainPrompt" value="30s promo for Sydney solar panels, professional vibe" class="w-full bg-zinc-800 p-4 rounded-2xl">
+      
+      <div class="flex gap-2 mt-4 flex-wrap">
+        <button onclick="addParam('📍 Sydney realistic')" class="bg-zinc-700 px-3 py-1 rounded">📍 Add Sydney realistic</button>
+        <button onclick="addParam('👔 Professional actors')" class="bg-zinc-700 px-3 py-1 rounded">👔 Professional actors</button>
+        <button onclick="addParam('🔵 Brand blue lock')" class="bg-zinc-700 px-3 py-1 rounded">🔵 Brand blue lock</button>
+        <button onclick="generateWithInference()" class="bg-emerald-500 text-black px-5 py-1 rounded font-bold">Generate with all inferred params</button>
+      </div>
+
+      <div class="mt-8 grid grid-cols-2 gap-4">
+        <div class="bg-zinc-800 p-4 rounded-2xl">
+          📹 30s Video Promo<br>
+          <span class="text-emerald-400 text-xs">Applied: Photoreal • 30s • Professional voice • Sydney skyline • Brand colours</span>
+        </div>
+        <div class="bg-zinc-800 p-4 rounded-2xl">
+          📸 5 Social Images + Carousel<br>
+          <span class="text-emerald-400 text-xs">Applied: Square/Vertical • Trust badges • CTA overlay</span>
+        </div>
+      </div>
+      <button onclick="alert('✅ All assets generated with zero guesswork! Ready for testing with clients.')" class="mt-6 w-full bg-white text-zinc-950 py-4 font-bold">📥 DOWNLOAD PACK + SCHEDULE POSTS</button>
+    </div>
+
+    <!-- Right panel - Direct controls -->
+    <div class="w-80 bg-zinc-900 p-4 space-y-4">
+      <h3>🎛️ Direct Output</h3>
+      <button onclick="alert('Tone shifted to more professional ✓')" class="w-full bg-zinc-700 py-2">↑ More Professional</button>
+      <button onclick="alert('Added clear CTA + contact • Realism increased')" class="w-full bg-zinc-700 py-2">Add strong CTA + boost realism</button>
+      <button onclick="alert('Brand colours locked and applied to all assets ✓')" class="w-full bg-emerald-600 text-black py-2">🔒 Lock & Apply Brand Kit</button>
+      <div class="text-xs bg-zinc-800 p-3">Agent Status: Prompt parsed • 7 parameters inferred • 2 refinements suggested • Ready in 1.8s</div>
     </div>
   </div>
+  <script>
+    function autoInfer() { alert("Industry detected → parameters auto-filled (Sydney, solar, professional, video + images, brand safe)"); }
+    function addParam(text) { alert(text + " added to prompt and will be applied in generation"); }
+    function generateWithInference() { alert("🎉 Full pack generated with ALL inferred parameters! This is how DeepMark removes the guesswork for corporate users."); }
+  </script>
 </body>
 </html>
